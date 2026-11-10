@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matilda | Resumen, Análisis y Cuestionario</title>
+    
+    <!-- Fuentes Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Iconos FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* Paleta de Colores Moderna */
+            --primary: #512da8; /* Morado profundo (Magia) */
+            --primary-light: #8559da;
+            --secondary: #ffc107; /* Dorado (Brillantez) */
+            --secondary-hover: #ffca28;
+            --accent: #00bcd4; /* Cian (Infantil/Fantasía) */
+            --bg-color: #f4f6f9;
+            --text-main: #333333;
+            --text-muted: #555555;
+            --card-bg: #ffffff;
+            --success: #2e7d32;
+            --success-bg: #e8f5e9;
+            --danger: #c62828;
+            --danger-bg: #ffebee;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Cabecera / Logo */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 2.5rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 2.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        header p {
+            font-size: 1.1rem;
+            margin-top: 10px;
+            opacity: 0.95;
+            font-weight: 600;
+        }
+
+        /* Contenedor Principal */
+        .container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Pestañas (Tabs) */
+        .tab-menu {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+
+        .tab-btn {
+            background-color: var(--card-bg);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tab-btn:hover {
+            background-color: var(--primary-light);
+            color: white;
+            border-color: var(--primary-light);
+        }
+
+        .tab-btn.active {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 8px rgba(81, 45, 168, 0.3);
+        }
+
+        /* Contenido de las Pestañas */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Tarjetas de Información */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+            margin-bottom: 1.5rem;
+            border-top: 5px solid var(--secondary);
+        }
+        
+        .card.accent-border { border-top-color: var(--accent); }
+        .card.primary-border { border-top-color: var(--primary); }
+
+        .card h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+            transition: transform 0.2s ease;
+        }
+
+        .info-box:hover {
+            transform: translateY(-3px);
+        }
+
+        .info-box h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .trait-box {
+            background-color: #fff;
+            padding: 10px 15px;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+            margin-top: 10px;
+            font-size: 0.95rem;
+        }
+
+        .trait-title {
+            font-weight: 700;
+            color: var(--primary-light);
+            display: block;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+
+        .author-meta {
+            list-style: none;
+            margin-top: 15px;
+        }
+        
+        .author-meta li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .author-meta i {
+            color: var(--accent);
+            font-size: 1.2rem;
+            width: 25px;
+            text-align: center;
+        }
+
+        /* Cuestionario */
+        .quiz-question {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-question p.q-text {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .options-group label {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .options-group label:hover:not(.disabled) {
+            background: #eef2f5;
+            border-color: var(--primary-light);
+        }
+        
+        .options-group label.disabled {
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+
+        .options-group input[type="radio"] {
+            margin-right: 12px;
+            accent-color: var(--primary);
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .options-group input[type="radio"]:disabled {
+            cursor: not-allowed;
+        }
+
+        .feedback-box {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 6px;
+            display: none;
+            font-size: 0.95rem;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .feedback-box.correct {
+            display: block;
+            background-color: var(--success-bg);
+            color: var(--success);
+            border-left: 4px solid var(--success);
+        }
+
+        .feedback-box.incorrect {
+            display: block;
+            background-color: var(--danger-bg);
+            color: var(--danger);
+            border-left: 4px solid var(--danger);
+        }
+
+        /* Botones de acción */
+        .btn-submit {
+            background-color: var(--secondary);
+            color: #333;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            border-radius: 30px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            max-width: 350px;
+            margin: 2rem auto;
+            box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--secondary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 193, 7, 0.6);
+        }
+
+        /* Modal Moderno */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-box {
+            background: var(--card-bg);
+            width: 90%;
+            max-width: 500px;
+            border-radius: 15px;
+            padding: 2.5rem;
+            text-align: center;
+            position: relative;
+            transform: scale(0.8);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .modal-overlay.show .modal-box {
+            transform: scale(1);
+        }
+
+        .modal-box i.icon-score {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .score-excellent { color: var(--success); }
+        .score-good { color: var(--secondary); }
+        .score-poor { color: var(--danger); }
+
+        .modal-box h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .modal-box p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-close-modal {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .btn-close-modal:hover {
+            background: var(--primary-light);
+        }
+
+        .close-icon {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: #aaa;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .close-icon:hover { color: var(--danger); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.2rem; }
+            .tab-btn { flex: 1 1 calc(50% - 10px); justify-content: center; }
+            .card-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+            .tab-btn { flex: 1 1 100%; }
+            header h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><i class="fa-solid fa-book-magic"></i> MATILDA</h1>
+        <p>Resumen interactivo, análisis y cuestionario oficial</p>
+    </header>
+
+    <div class="container">
+        <!-- Navegación de Pestañas -->
+        <nav class="tab-menu">
+            <button class="tab-btn active" onclick="openTab('resumen', this)">
+                <i class="fa-solid fa-feather-pointed"></i> Autor & Obra
+            </button>
+            <button class="tab-btn" onclick="openTab('personajes', this)">
+                <i class="fa-solid fa-users-viewfinder"></i> Personajes
+            </button>
+            <button class="tab-btn" onclick="openTab('trama', this)">
+                <i class="fa-solid fa-book-open"></i> Trama
+            </button>
+            <button class="tab-btn" onclick="openTab('quiz', this)">
+                <i class="fa-solid fa-list-check"></i> Cuestionario
+            </button>
+        </nav>
+
+        <!-- Contenido: Autor y Obra -->
+        <main id="resumen" class="tab-content active">
+            <div class="card">
+                <h2><i class="fa-solid fa-user-pen"></i> Sobre el Autor</h2>
+                <div class="card-grid">
+                    <div class="info-box">
+                        <h3>Biografía</h3>
+                        <p><strong>Roald Dahl</strong> es uno de los escritores infantiles más celebrados del mundo. Su estilo se caracteriza por una imaginación desbordante, ternura, humor negro y sátira hacia los adultos crueles.</p>
+                        <ul class="author-meta">
+                            <li><i class="fa-solid fa-flag"></i> <strong>Nacionalidad:</strong> Británico (nacido en Llandaf, Gales, de padres noruegos).</li>
+                            <li><i class="fa-solid fa-baby"></i> <strong>Nacimiento:</strong> 1916.</li>
+                            <li><i class="fa-solid fa-cross"></i> <strong>Fallecimiento:</strong> Murió en Oxford a los 74 años (1990).</li>
+                            <li><i class="fa-solid fa-plane"></i> <strong>Dato curioso:</strong> Fue piloto de aviación en la Royal Air Force durante la Segunda Guerra Mundial y trabajó para Shell en África.</li>
+                        </ul>
+                    </div>
+                    <div class="info-box">
+                        <h3>Obras Principales</h3>
+                        <p>Comenzó a escribir para niños basándose en los cuentos que les narraba a sus propios hijos. Algunas de sus obras cumbres incluyen:</p>
+                        <ul class="author-meta">
+                            <li><i class="fa-solid fa-book"></i> <em>Charlie y la fábrica de chocolate</em> (1964)</li>
+                            <li><i class="fa-solid fa-book"></i> <em>Las brujas</em></li>
+                            <li><i class="fa-solid fa-book"></i> <em>El gran gigante bonachón (El BFG)</em></li>
+                            <li><i class="fa-solid fa-book"></i> <em>James y el melocotón gigante</em></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card accent-border">
+                <h2><i class="fa-solid fa-calendar-days"></i> Creación de Matilda y Contexto Histórico</h2>
+                <p><strong>Año de creación:</strong> Publicado en <strong>1988</strong>.</p>
+                <p><strong>Contexto Histórico:</strong> A finales de la década de 1980, el auge desmedido de la televisión y el entretenimiento pasivo (como el bingo) comenzaban a desplazar fuertemente a la lectura tradicional en el seno familiar. Dahl refleja esta preocupación social en la obra satirizando a la ignorante familia Wormwood, quienes consideran que los libros son "basura" en comparación con su televisor de doce pulgadas. Asimismo, la escuela y el rígido y opresivo sistema educativo británico tradicional (donde el autor sufrió castigos de niño) sirven de inspiración para crear a la monstruosa directora Trunchbull, quien emplea abusos anticuados e injustificados que chocan con la pedagogía empática y moderna de la señorita Honey.</p>
+            </div>
+
+            <div class="card primary-border">
+                <h2><i class="fa-solid fa-layer-group"></i> Análisis Literario</h2>
+                <ul>
+                    <li><strong>Tipo de narrador:</strong> Omnisciente en tercera persona. Es un narrador activo que emite juicios sobre los personajes (especialmente los padres), a menudo con un tono cómico y directo, rompiendo la cuarta pared para interactuar con el lector.</li>
+                    <li><strong>Enseñanza:</strong> La lectura, la imaginación y la inteligencia son armas poderosas contra la tiranía y la ignorancia de los adultos. Además, plantea que la verdadera familia se construye con base en el amor, la empatía y el respeto mutuo, tal como la que forman Matilda y la señorita Honey.</li>
+                </ul>
+            </div>
+        </main>
+
+        <!-- Contenido: Personajes -->
+        <main id="personajes" class="tab-content">
+            
+            <div class="card">
+                <h2><i class="fa-solid fa-house-chimney-user"></i> La Familia Wormwood</h2>
+                <div class="card-grid">
+                    <div class="info-box">
+                        <h3><i class="fa-solid fa-child"></i> Matilda Wormwood</h3>
+                        <div class="trait-box">
+                            <span class="trait-title"><i class="fa-solid fa-eye"></i> Descripción Física</span>
+                            Niña pequeñaja de pelo oscuro, cara redonda y grandes ojos castaños brillantes. Sus pies quedan colgando sin llegar al suelo cuando se sienta en la biblioteca.
+                        </div>
+                        <div class="trait-box">
+                            <span class="trait-title"><i class="fa-solid fa-brain"></i> Descripción Psicológica</span>
+                            Niña prodigio y precoz. Es extraordinariamente brillante, aguda, sensible y una lectora voraz desde los tres años. Posee una mente matemática excepcional. Es solemne, carece de vanidad, es muy sensata y justa. Valiente y vengativa ante los abusos, usando su ingenio (y luego su telequinesis) para castigar a los malos.
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <h3><i class="fa-solid fa-car"></i> Sr. Harry Wormwood</h3>
+                        <div class="trait-box">
+                            <span class="trait-title"><i class="fa-solid fa-eye"></i> Descripción Física</span>
+                            Hombrecillo enjuto de rostro malhumorado. Sus dientes superiores sobresalen por debajo de un bigotillo esmirriado y de aspecto lastimoso. Viste chillonas chaquetas de cuadros naranjas y verdes con corbatas llamativas. Presume de su espléndida cabellera negra peinada con raya en medio.
+                        </div>
+                        <div class="trait-box">
+                            <span class="trait-title"><i class="fa-solid fa-brain"></i> Descripción Psicológica</span>
+                            Vendedor de coches de segunda mano estafador. Es egoísta, deshonesto, machista y fanfarrón. Desprecia profundamente los libros y el conocimiento. Forma parte de una red criminal que altera autos robados.
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <h3><i class="fa-solid fa-ticket"></i> Sra. Wormwood</h3>
+                        <div class="trait-box">
+                            <span class="trait-title"><i class="fa-solid fa-eye"></i> Descripción Física</span>
+                            Mujerona regordeta con cara de torta. Su cuerpo es abotargado y poco agraciado ("la carne parece estar atada para evitar que se caiga"). Lleva el pelo teñido de rubio platino (salvo las raíces oscuras) y usa mucho maquillaje.
+                        </div>
+                        <div class="trait-box">
+                            <span class="trait-title"><i class="fa-solid fa-brain"></i> Descripción Psicológica</span>
+                            Adicta a jugar al bingo todas las tardes. Es lerda, superficial y carece por completo de instinto maternal o interés en sus hijos. Cree firmemente que la belleza exterior es más importante que la inteligencia para conseguir marido.
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <h3><i class="fa-solid fa-boy"></i> Michael Wormwood</h3>
+                        <div class="trait-box">
+                            <span class="trait-title"><i class="fa-solid fa-eye"></i> Descripción Física</span>
+                            Niño de diez años (cinco años mayor que Matilda). Su aspecto físico es el de un niño normal.
+                        </div>
+                        <div class="trait-box">
+                            <span class="trait-title"><i class="fa-solid fa-brain"></i> Descripción Psicológica</span>
+                            Es un niño de lo más normal que obedece ciegamente a su padre. Le fascinan los engaños y parece haber heredado la afición de su padre por la estafa en los negocios.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card accent-border">
+                <h2><i class="fa-solid fa-school"></i> Personal del Colegio Crunchem</h2>
+                <div class="card-grid">
+                    <div class="info-box">
+                        <h3><i class="fa-solid fa-chalkboard-user"></i> Señorita Honey (Jenny)</h3>
+                        <div class="trait-box">
+                            <span class="trait-title"><i class="fa-solid fa-eye"></i> Descripción Física</span>
+                            Joven de 23 o 24 años. Posee un bonito rostro ovalado pálido "de madonna", con ojos azules y pelo castaño claro. Su cuerpo es tan delgado y frágil que da la impresión de que podría romperse como una figurita de porcelana.
+                        </div>
+                        <div class="trait-box">
+                            <span class="trait-title"><i class="fa-solid fa-brain"></i> Descripción Psicológica</span>
+                            Es una maestra apacible, discreta y empática; rara vez levanta la voz o sonríe, pero irradia cordialidad y comprensión hacia los niños. Arrastra un trauma profundo, criándose aterrorizada y dominada como esclava por su tía Trunchbull. Sin embargo, saca valor para defender y estimular el talento de Matilda.
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <h3><i class="fa-solid fa-gavel"></i> Señorita Trunchbull (Agatha)</h3>
+                        <div class="trait-box">
+                            <span class="trait-title"><i class="fa-solid fa-eye"></i> Descripción Física</span>
+                            Gigantesca mujerona impresionante y feroz. Tiene cuello de toro, amplias espaldas, gruesos brazos y fuertes piernas que denotan su pasado como atleta olímpica. Su rostro muestra una barbilla obstinada, boca cruel y ojillos altaneros. Viste un guardapolvo marrón con cinturón de cuero, pantalones de montar verdes de sarga y calcetines hasta las rodillas.
+                        </div>
+                        <div class="trait-box">
+                            <span class="trait-title"><i class="fa-solid fa-brain"></i> Descripción Psicológica</span>
+                            Directora excéntrica, tiránica y sádica. Odia profundamente a los niños pequeños y cree firmemente en la brutalidad, usando el miedo y la fuerza bruta para imponer disciplina. Robó la casa y el sueldo de su sobrina Jenny con crueldad y engaños.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card primary-border">
+                <h2><i class="fa-solid fa-users"></i> Estudiantes</h2>
+                <div class="card-grid">
+                    <div class="info-box">
+                        <h3><i class="fa-solid fa-child-reaching"></i> Lavender</h3>
+                        <div class="trait-box">
+                            <span class="trait-title"><i class="fa-solid fa-eye"></i> Descripción Física</span>
+                            Excepcionalmente pequeña y flacucha, con profundos ojos castaños y pelo oscuro que cae en forma de flequillo sobre su frente.
+                        </div>
+                        <div class="trait-box">
+                            <span class="trait-title"><i class="fa-solid fa-brain"></i> Descripción Psicológica</span>
+                            Amiga leal de Matilda. Es una niña decidida, intrigante y muy aventurera, dispuesta a ser una heroína al atreverse a cazar y meter la salamandra en la jarra de agua de la directora.
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <h3><i class="fa-solid fa-cake-candles"></i> Bruce Bogtrotter</h3>
+                        <div class="trait-box">
+                            <span class="trait-title"><i class="fa-solid fa-eye"></i> Descripción Física</span>
+                            Niño de once años, alto, regordete y blandengue, que suele andar con las medias caídas sobre los tobillos y contoneándose al caminar.
+                        </div>
+                        <div class="trait-box">
+                            <span class="trait-title"><i class="fa-solid fa-brain"></i> Descripción Psicológica</span>
+                            Aunque al principio se muestra asustado y cauteloso (es un "glotón" que robó un trozo de tarta), desarrolla un espíritu de resistencia y tenacidad admirables, venciéndole la batalla a la Trunchbull al lograr comerse la inmensa tarta entera sin rendirse.
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <h3><i class="fa-solid fa-shield-halved"></i> Hortensia</h3>
+                        <div class="trait-box">
+                            <span class="trait-title"><i class="fa-solid fa-eye"></i> Descripción Física</span>
+                            Chica robusta de diez años, destaca un grano en su nariz. Suele estar atiborrándose de patatas fritas.
+                        </div>
+                        <div class="trait-box">
+                            <span class="trait-title"><i class="fa-solid fa-brain"></i> Descripción Psicológica</span>
+                            Veterana de guerra en el colegio. Es atrevida, vengativa y actúa como una "cruzada" instruyendo a las pequeñas. Es experta en poner trampas (como polvos pica-pica y jarabe) contra la directora, y ha sobrevivido múltiples veces a "La ratonera".
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <h3><i class="fa-solid fa-ribbon"></i> Amanda Thripp</h3>
+                        <div class="trait-box">
+                            <span class="trait-title"><i class="fa-solid fa-eye"></i> Descripción Física</span>
+                            Niña de diez años que lleva el pelo largo recogido en dos coletas rubias que le caen por la espalda, atadas con lazos de raso azul.
+                        </div>
+                        <div class="trait-box">
+                            <span class="trait-title"><i class="fa-solid fa-brain"></i> Descripción Psicológica</span>
+                            Niña tímida que, ante la presencia de la Trunchbull, se queda paralizada de terror y tartamudea sintiéndose totalmente indefensa antes de ser lanzada por los aires por sus coletas.
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <h3><i class="fa-solid fa-hand-fist"></i> Nigel Hicks</h3>
+                        <div class="trait-box">
+                            <span class="trait-title"><i class="fa-solid fa-eye"></i> Descripción Física</span>
+                            Niño pequeño de cinco años, hijo de un médico. Siempre tiene las manos sucias y comida en la camisa.
+                        </div>
+                        <div class="trait-box">
+                            <span class="trait-title"><i class="fa-solid fa-brain"></i> Descripción Psicológica</span>
+                            Inusualmente despierto y extremadamente valiente. Se arriesga frente a la Trunchbull rebatiendo sus palabras, defiende a la señorita Honey y es quien le tira el agua en la cara a la directora cuando se desmaya.
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <h3><i class="fa-solid fa-user-injured"></i> Eric Ink & Rupert</h3>
+                        <div class="trait-box">
+                            <span class="trait-title"><i class="fa-solid fa-eye"></i> Descripción Física</span>
+                            **Rupert:** Niño con hermosa y larga cabellera rubia. <br>
+                            **Eric:** Niño pequeño (luego con las orejas más alargadas).
+                        </div>
+                        <div class="trait-box">
+                            <span class="trait-title"><i class="fa-solid fa-brain"></i> Descripción Psicológica</span>
+                            Son los infortunados compañeros de Matilda. Se muestran valientes pero son rápidamente aterrorizados cuando la Trunchbull levanta a Rupert del pelo y a Eric agarrándolo dolorosamente de las orejas.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2><i class="fa-solid fa-circle-plus"></i> Otros Personajes</h2>
+                <div class="card-grid">
+                    <div class="info-box">
+                        <h3><i class="fa-solid fa-book-open-reader"></i> Señora Phelps</h3>
+                        <div class="trait-box">
+                            <span class="trait-title"><i class="fa-solid fa-eye"></i> Descripción Física</span>
+                            La bibliotecaria del pueblo. Destaca por su altura, debiendo bajar siempre la vista para mirar a la pequeña Matilda.
+                        </div>
+                        <div class="trait-box">
+                            <span class="trait-title"><i class="fa-solid fa-brain"></i> Descripción Psicológica</span>
+                            Es compasiva, paciente y muy intuitiva. Se queda fascinada y estupefacta con el talento de Matilda, pero decide prudentemente no interferir ni entrometerse en los asuntos de la familia de la niña, limitándose a proveerle grandes libros.
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <h3><i class="fa-solid fa-stethoscope"></i> Magnus (Padre de Honey)</h3>
+                        <div class="trait-box">
+                            <span class="trait-title"><i class="fa-solid fa-eye"></i> Descripción Física</span>
+                            Fallecido. No hay descripción física explícita, se sabe que era el doctor del pueblo.
+                        </div>
+                        <div class="trait-box">
+                            <span class="trait-title"><i class="fa-solid fa-brain"></i> Descripción Psicológica</span>
+                            Médico muy ocupado que quedó viudo temprano. Hombre muy sensato e inteligente. Su muerte, presuntamente un suicidio, levanta profundas sospechas de haber sido un asesinato orquestado por su cuñada, la Trunchbull.
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <h3><i class="fa-solid fa-crow"></i> Fred</h3>
+                        <div class="trait-box">
+                            <span class="trait-title"><i class="fa-solid fa-eye"></i> Descripción Física</span>
+                            Niño de seis años que vive a la vuelta de la esquina de la casa de Matilda.
+                        </div>
+                        <div class="trait-box">
+                            <span class="trait-title"><i class="fa-solid fa-brain"></i> Descripción Psicológica</span>
+                            Amigo de Matilda. Se siente orgulloso de su loro parlanchín (Chopper) y tiene sentido del trueque, aceptando prestarlo a cambio de la paga semanal de Matilda.
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <h3><i class="fa-solid fa-kitchen-set"></i> La Cocinera</h3>
+                        <div class="trait-box">
+                            <span class="trait-title"><i class="fa-solid fa-eye"></i> Descripción Física</span>
+                            Mujer alta y arrugada, con aspecto de que la hubieran secado hacía tiempo en un horno. Siempre lleva un sucio delantal blanco y su rostro está avinagrado ("parecía que tuviera la boca llena de zumo de limón").
+                        </div>
+                        <div class="trait-box">
+                            <span class="trait-title"><i class="fa-solid fa-brain"></i> Descripción Psicológica</span>
+                            Mujer seca, implacable y desaprobadora, actúa como servil cómplice de la directora Trunchbull para el castigo de la tarta.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Contenido: Trama -->
+        <main id="trama" class="tab-content">
+            <div class="card">
+                <h2><i class="fa-solid fa-hourglass-start"></i> Inicio de la Historia</h2>
+                <p>Matilda, una niña excepcionalmente dotada, aprende a leer de corrido a los cuatro años. Sus padres, absortos en la televisión y las estafas, la ignoran por completo, tratándola como una "postilla". Matilda encuentra refugio en la biblioteca de la señora Phelps. Para canalizar su frustración ante la rudeza e insultos de su padre, comienza a idear trampas secretas para castigarlo: le pone pegamento súper fuerte en el sombrero y cambia su loción capilar por tinte rubio platino.</p>
+            </div>
+            <div class="card">
+                <h2><i class="fa-solid fa-bolt"></i> Nudo y Descubrimiento</h2>
+                <p>Matilda ingresa a la escuela primaria Crunchem. Allí, la dulce señorita Honey descubre de inmediato la mente matemática y literaria brillante de la niña. En contraste, la directora Trunchbull instaura un régimen de terror militar, lanzando a los niños por los aires y encerrándolos en un armario de tortura. Durante una tensa clase, Trunchbull acusa injustamente a Matilda de haber puesto una salamandra (en realidad puesta por Lavender) en su jarra de agua. La indignación de Matilda es tan inmensa que la energía se concentra en sus ojos y desarrolla telequinesis, volcando el vaso sobre la directora sin tocarlo.</p>
+            </div>
+            <div class="card">
+                <h2><i class="fa-solid fa-flag-checkered"></i> Desenlace</h2>
+                <p>La señorita Honey invita a Matilda a su humilde choza y le confiesa su trágico pasado: Trunchbull es la tía que la crio como esclava, se adueñó de su salario de maestra y, supuestamente, falsificó documentos tras la misteriosa muerte de su padre (Magnus) para robar su herencia. Para ayudarla, Matilda perfecciona su poder practicando con un puro en su cuarto. Al día siguiente en clase, utiliza su telequinesis para hacer levitar una tiza y escribir un mensaje en la pizarra amenazando a la directora fingiendo ser el fantasma de Magnus. Trunchbull huye aterrorizada y desaparece para siempre, permitiendo que la señorita Honey recupere su casa y dinero.</p>
+                <p>Finalmente, los padres de Matilda hacen las maletas para huir precipitadamente a España porque la policía descubrió la red criminal de coches robados del padre. Matilda les ruega quedarse con la señorita Honey, a lo que ellos acceden con prisa y desinterés. Matilda, habiendo perdido sus poderes al poder por fin agotar su energía intelectual en la escuela avanzada, forma una nueva familia llena de amor con su querida maestra.</p>
+            </div>
+        </main>
+
+        <!-- Contenido: Cuestionario -->
+        <main id="quiz" class="tab-content">
+            <div class="card">
+                <h2><i class="fa-solid fa-brain"></i> Cuestionario Oficial Interactivo</h2>
+                <p style="margin-bottom: 20px; color: var(--text-muted);">Responde a estas 30 preguntas de selección múltiple. Al seleccionar una opción, se evaluará al instante y podrás leer la explicación de la respuesta.</p>
+                
+                <div id="quiz-container">
+                    <!-- Las preguntas se inyectan dinámicamente vía JavaScript -->
+                </div>
+                
+                <button class="btn-submit" onclick="mostrarResultadosFinales()">
+                    <i class="fa-solid fa-trophy"></i> Ver Resultado Final
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal de Resultados -->
+    <div id="scoreModal" class="modal-overlay">
+        <div class="modal-box">
+            <i class="fa-solid fa-xmark close-icon" onclick="closeModal()"></i>
+            <i id="modal-icon" class="fa-solid fa-award icon-score"></i>
+            <h3 id="modal-title">Resultado</h3>
+            <p id="modal-desc">Has completado el cuestionario.</p>
+            <button class="btn-close-modal" onclick="closeModal()">Cerrar</button>
+        </div>
+    </div>
+
+    <script>
+        // Lógica de Pestañas
+        function openTab(tabName, btnElement) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabName).classList.add('active');
+            btnElement.classList.add('active');
+        }
+
+        // Datos del Cuestionario
+        const preguntas = [
+            {
+                q: "¿Quién es el autor del libro Matilda?",
+                options: ["Charles Dickens", "Roald Dahl", "C.S. Lewis"],
+                ans: 1,
+                exp: "Roald Dahl es el famoso autor británico-galés de la obra."
+            },
+            {
+                q: "¿A qué edad aprendió Matilda a leer sola?",
+                options: ["A los 3 años", "A los 5 años", "A los 4 años"],
+                ans: 0,
+                exp: "A los tres años ya había aprendido a leer usando periódicos y revistas en su casa."
+            },
+            {
+                q: "¿A qué se dedica el señor Wormwood?",
+                options: ["Es médico", "Vende coches de segunda mano", "Es bibliotecario"],
+                ans: 1,
+                exp: "Era un vendedor de autos usados que estafaba a los clientes alterando el kilometraje."
+            },
+            {
+                q: "¿Qué usaba el padre de Matilda para ocultar el ruido en la caja de cambios del motor?",
+                options: ["Pegamento", "Arena", "Serrín"],
+                ans: 2,
+                exp: "Mezclaba serrín con el aceite de la caja de cambios para que el auto sonara suave temporalmente."
+            },
+            {
+                q: "¿Cuál fue la primera venganza de Matilda contra su padre?",
+                options: ["Teñirle el pelo", "Ponerle pegamento en el sombrero", "Asustarlo con un loro"],
+                ans: 1,
+                exp: "Puso pegamento superfuerte en la banda interior del sombrero, dejándolo pegado a su cabeza."
+            },
+            {
+                q: "¿Qué hace la madre de Matilda todas las tardes?",
+                options: ["Jugar al bingo en un pueblo cercano", "Trabajar en la escuela", "Ver programas de cocina"],
+                ans: 0,
+                exp: "La señora Wormwood era fanática del bingo y dejaba a Matilda sola todas las tardes."
+            },
+            {
+                q: "¿Cómo se llama la bibliotecaria que ayuda a Matilda?",
+                options: ["Sra. Phelps", "Srta. Plimsoll", "Srta. Honey"],
+                ans: 0,
+                exp: "La señora Phelps era la encargada de la biblioteca que le recomendaba los clásicos literarios."
+            },
+            {
+                q: "¿Cuál fue la primera novela para adultos famosa que leyó Matilda?",
+                options: ["El jardín secreto", "Grandes esperanzas", "Oliver Twist"],
+                ans: 1,
+                exp: "La Sra. Phelps le entregó 'Grandes esperanzas' escrita por Charles Dickens."
+            },
+            {
+                q: "¿Qué animal esconde Matilda en la chimenea para hacer creer a su familia que hay un fantasma?",
+                options: ["Un ratón", "Un búho", "Un loro"],
+                ans: 2,
+                exp: "Pidió prestado a su amigo Fred un loro parlanchín llamado Chopper."
+            },
+            {
+                q: "¿De qué color queda el pelo del Sr. Wormwood tras la venganza de Matilda?",
+                options: ["Verde botella", "Plateado sucio / rubio platino", "Rojo brillante"],
+                ans: 1,
+                exp: "Matilda rellenó el tónico capilar de su padre con el tinte rubio platino extrafuerte de su madre."
+            },
+            {
+                q: "¿Cómo se llama la escuela a la que asiste Matilda?",
+                options: ["Escuela Primaria Crunchem", "Colegio Dotheboys", "Academia Trunchbull"],
+                ans: 0,
+                exp: "La Escuela Primaria Crunchem era el lúgubre edificio dirigido por la señorita Trunchbull."
+            },
+            {
+                q: "¿Quién es la dulce y empática profesora de Matilda?",
+                options: ["Señorita Plimsoll", "Señorita Honey", "Señora Phelps"],
+                ans: 1,
+                exp: "La señorita Jenny Honey es la maestra que descubre de inmediato la genialidad de la niña."
+            },
+            {
+                q: "¿Qué disciplina deportiva de las Olimpiadas practicaba la directora Trunchbull?",
+                options: ["Lanzamiento de jabalina", "Salto de longitud", "Lanzamiento de martillo"],
+                ans: 2,
+                exp: "Había sido lanzadora de martillo del equipo inglés y usaba esa fuerza y técnica para arrojar a los niños."
+            },
+            {
+                q: "¿Cómo se llama el estrecho armario de castigo de la directora?",
+                options: ["El calabozo", "La ratonera", "La caja oscura"],
+                ans: 1,
+                exp: "'La ratonera' era un clóset estrecho con paredes incrustadas de vidrio y una puerta llena de clavos."
+            },
+            {
+                q: "¿Qué animal introduce Lavender secretamente en la jarra de agua de la directora?",
+                options: ["Una araña", "Una rana", "Una salamandra"],
+                ans: 2,
+                exp: "Lavender capturó una asquerosa salamandra en la charca de su jardín para asustar a Trunchbull."
+            },
+            {
+                q: "¿A qué alumna lanza la directora por los aires agarrándola de las coletas rubias?",
+                options: ["Amanda Thripp", "Hortensia", "Prudence"],
+                ans: 0,
+                exp: "La directora odiaba las coletas y lanzó a Amanda Thripp por encima de la cerca del patio."
+            },
+            {
+                q: "¿Qué castigo recibe el chico Bruce Bogtrotter en el salón de actos?",
+                options: ["Estar todo el día en La ratonera", "Comer una gigantesca tarta de chocolate entera", "Copiar mil líneas"],
+                ans: 1,
+                exp: "Lo obligó a comérsela frente a toda la escuela por haber robado un pequeño trozo previamente."
+            },
+            {
+                q: "¿Cómo descubre Matilda su poder telequinético en clase?",
+                options: ["Levantando una tiza magnética", "Doblando una cuchara de metal", "Volcando un vaso de agua"],
+                ans: 2,
+                exp: "Por la indignación de ser acusada injustamente, logró volcar el vaso con la salamandra usando la mente."
+            },
+            {
+                q: "¿Qué objeto utiliza Matilda para practicar y perfeccionar sus poderes en su dormitorio?",
+                options: ["Una moneda de oro", "El sombrero de su padre", "Un puro de la caja de su padre"],
+                ans: 2,
+                exp: "Usó un puro porque tenía el peso exacto ideal para concentrarse en levantarlo en el aire."
+            },
+            {
+                q: "¿Qué parentesco oscuro tiene Trunchbull con la señorita Honey?",
+                options: ["Es su abuela", "Es su tía", "Es su madrastra"],
+                ans: 1,
+                exp: "Trunchbull (Agatha) es la tía materna que usurpó la casa y crio a Jenny como esclava."
+            },
+            {
+                q: "¿Cómo se llamaba el difunto padre de la señorita Honey?",
+                options: ["Magnus", "Harry", "Michael"],
+                ans: 0,
+                exp: "El doctor Magnus murió en circunstancias sospechosas (presunto suicidio) cuando Honey tenía 5 años."
+            },
+            {
+                q: "¿Cuánto pagaba de alquiler la señorita Honey al granjero por su humilde cabaña?",
+                options: ["10 libras a la semana", "10 peniques a la semana", "No pagaba nada, era gratis"],
+                ans: 1,
+                exp: "Vivía en pobreza extrema pagando 10 peniques porque su tía confiscaba directamente todo su sueldo."
+            },
+            {
+                q: "¿Cómo asusta Matilda de forma definitiva a la directora para que devuelva la casa?",
+                options: ["Levantándola por los aires", "Haciendo que la tiza escriba un mensaje sola en la pizarra", "Rompiendo los cristales"],
+                ans: 1,
+                exp: "Usando sus poderes, escribió un mensaje amenazante simulando ser el fantasma vengativo de Magnus."
+            },
+            {
+                q: "¿Por qué hace las maletas la familia Wormwood para huir al final de la historia?",
+                options: ["Ganaron la lotería nacional", "El padre está involucrado en una banda criminal de coches robados", "Consiguieron un negocio legal en otro país"],
+                ans: 1,
+                exp: "El Sr. Wormwood recibía coches robados, cambiaba sus matrículas y la policía estaba por atraparlo."
+            },
+            {
+                q: "¿A qué país huyen los padres de Matilda?",
+                options: ["España", "Francia", "Australia"],
+                ans: 0,
+                exp: "Huyeron a España porque creían que allí la policía británica no podría extraditarlos ni atraparlos."
+            },
+            {
+                q: "¿Qué decisión final toma Matilda cuando sus padres están a punto de escapar?",
+                options: ["Se esconde en la biblioteca pública", "Se va con ellos obligada a España", "Se queda a vivir felizmente con la señorita Honey"],
+                ans: 2,
+                exp: "Corrió a pedir permiso a sus padres para quedarse, a lo que ellos accedieron con desinterés y sin siquiera mirarla."
+            },
+            {
+                q: "¿Qué ocurre con los poderes telequinéticos de Matilda en el desenlace?",
+                options: ["Se vuelven mucho más fuertes", "Los pierde por completo al saltar de curso", "Los usa en secreto para hacerse millonaria"],
+                ans: 1,
+                exp: "Desaparecen de repente porque al pasar a un grado superior, su inmenso cerebro agota su energía intelectual en los estudios."
+            },
+            {
+                q: "¿Cómo se llama el hermano mayor de Matilda?",
+                options: ["Michael", "Fred", "Julius"],
+                ans: 0,
+                exp: "Michael es el hijo 'normal' al que el padre espera heredarle todos sus trucos y su negocio fraudulento."
+            },
+            {
+                q: "¿Qué herramienta específica usaba el padre de Matilda para alterar ilegalmente el kilometraje?",
+                options: ["Un potente imán", "Una taladradora eléctrica de alta velocidad", "Un sistema informático"],
+                ans: 1,
+                exp: "Conectaba la taladradora al revés en los cables del cuentakilómetros para que retrocedieran a máxima velocidad."
+            },
+            {
+                q: "¿Qué estudiante experta relata a Matilda y Lavender las terroríficas proezas de Trunchbull?",
+                options: ["Amanda Thripp", "Hortensia", "Prudence"],
+                ans: 1,
+                exp: "Hortensia, una niña robusta de 10 años, instruye a las pequeñas sobre la guerra contra la directora y 'La ratonera'."
+            }
+        ];
+
+        let puntajeCorrecto = 0;
+        let respondidas = 0;
+
+        // Renderizar Cuestionario
+        const container = document.getElementById("quiz-container");
+        let htmlContent = "";
+
+        preguntas.forEach((p, index) => {
+            htmlContent += `
+            <div class="quiz-question" id="q-block-${index}">
+                <p class="q-text"><i class="fa-solid fa-circle-question" style="color:var(--secondary); margin-right:8px;"></i> ${index + 1}. ${p.q}</p>
+                <div class="options-group">`;
+            
+            p.options.forEach((opt, optIndex) => {
+                htmlContent += `
+                    <label id="label-${index}-${optIndex}">
+                        <input type="radio" name="q${index}" value="${optIndex}" onchange="verificarRespuesta(${index}, ${optIndex})">
+                        ${opt}
+                    </label>`;
+            });
+
+            htmlContent += `
+                </div>
+                <div id="feedback-${index}" class="feedback-box"></div>
+            </div>`;
+        });
+        
+        container.innerHTML = htmlContent;
+
+        // Función para validar la respuesta inmediatamente
+        function verificarRespuesta(qIndex, seleccionadaIndex) {
+            const p = preguntas[qIndex];
+            const opciones = document.getElementsByName(`q${qIndex}`);
+            const feedback = document.getElementById(`feedback-${qIndex}`);
+            
+            // Deshabilitar todas las opciones para esa pregunta
+            opciones.forEach((opt, idx) => {
+                opt.disabled = true;
+                const label = document.getElementById(`label-${qIndex}-${idx}`);
+                label.classList.add('disabled');
+            });
+
+            respondidas++;
+
+            if (seleccionadaIndex === p.ans) {
+                // Correcto
+                puntajeCorrecto++;
+                document.getElementById(`label-${qIndex}-${seleccionadaIndex}`).style.backgroundColor = "var(--success-bg)";
+                document.getElementById(`label-${qIndex}-${seleccionadaIndex}`).style.borderColor = "var(--success)";
+                
+                feedback.className = "feedback-box correct";
+                feedback.innerHTML = `<strong><i class="fa-solid fa-circle-check"></i> ¡Correcto!</strong><br><br><strong>Explicación:</strong> ${p.exp}`;
+            } else {
+                // Incorrecto
+                document.getElementById(`label-${qIndex}-${seleccionadaIndex}`).style.backgroundColor = "var(--danger-bg)";
+                document.getElementById(`label-${qIndex}-${seleccionadaIndex}`).style.borderColor = "var(--danger)";
+                
+                // Mostrar cuál era la correcta
+                document.getElementById(`label-${qIndex}-${p.ans}`).style.backgroundColor = "var(--success-bg)";
+                document.getElementById(`label-${qIndex}-${p.ans}`).style.borderColor = "var(--success)";
+                
+                feedback.className = "feedback-box incorrect";
+                feedback.innerHTML = `<strong><i class="fa-solid fa-circle-xmark"></i> Incorrecto.</strong> La respuesta correcta es: <em>${p.options[p.ans]}</em>.<br><br><strong>Explicación:</strong> ${p.exp}`;
+            }
+        }
+
+        // Control del Modal para el Resultado Final
+        const modal = document.getElementById('scoreModal');
+        
+        function mostrarResultadosFinales() {
+            const icon = document.getElementById('modal-icon');
+            const title = document.getElementById('modal-title');
+            const desc = document.getElementById('modal-desc');
+            const total = preguntas.length;
+            const porcentaje = (puntajeCorrecto / total) * 100;
+
+            icon.className = "fa-solid icon-score";
+            if (porcentaje >= 80) {
+                icon.classList.add("fa-trophy", "score-excellent");
+                title.innerText = "¡Excelente Trabajo!";
+                title.style.color = "var(--success)";
+            } else if (porcentaje >= 50) {
+                icon.classList.add("fa-thumbs-up", "score-good");
+                title.innerText = "¡Buen Intento!";
+                title.style.color = "var(--secondary)";
+            } else {
+                icon.classList.add("fa-book", "score-poor");
+                title.innerText = "Sigue practicando";
+                title.style.color = "var(--danger)";
+            }
+
+            desc.innerHTML = `Has respondido <strong>${respondidas}</strong> preguntas en total.<br>Tu puntuación es de <strong>${puntajeCorrecto}</strong> correctas de <strong>${total}</strong>.`;
+            modal.classList.add('show');
+        }
+
+        function closeModal() {
+            modal.classList.remove('show');
+        }
+
+        // Cerrar modal clickeando fuera
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
