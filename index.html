@@ -256,7 +256,7 @@
         .author-meta li { margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
         .author-meta i { color: var(--accent); font-size: 1.2rem; width: 25px; text-align: center; }
 
-        /* CUESTIONARIO Y ANIMACIONES DE SCROLL (Fade Groups) */
+        /* CUESTIONARIO Y ANIMACIONES DE SCROLL */
         .quiz-intro {
             text-align: center;
             margin-bottom: 2rem;
@@ -419,6 +419,18 @@
         .score-excellent { color: var(--success); }
         .score-good { color: var(--secondary); }
         .score-poor { color: var(--danger); }
+        .score-secondary { color: var(--primary); }
+
+        .nota-box {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 15px 0;
+            font-size: 2rem;
+            font-weight: 800;
+            font-family: 'Montserrat', sans-serif;
+            border: 2px dashed #ccc;
+        }
 
         .modal-box h3 {
             font-family: 'Montserrat', sans-serif;
@@ -502,9 +514,8 @@
     <!-- CONTENEDOR PRINCIPAL -->
     <div class="container">
         
-        <!-- PESTAÑA: Autor y Obra (Cascade Collapse) -->
+        <!-- PESTAÑA: Autor y Obra -->
         <main id="resumen" class="tab-content active">
-            
             <div class="accordion-item active">
                 <button class="accordion-header" onclick="toggleAccordion(this)">
                     <span><i class="fa-solid fa-user-pen"></i> Sobre el Autor</span>
@@ -573,9 +584,8 @@
             </div>
         </main>
 
-        <!-- PESTAÑA: Personajes (Cascade Collapse) -->
+        <!-- PESTAÑA: Personajes -->
         <main id="personajes" class="tab-content">
-            
             <div class="accordion-item active">
                 <button class="accordion-header" onclick="toggleAccordion(this)">
                     <span><i class="fa-solid fa-house-chimney-user"></i> La Familia Wormwood</span>
@@ -682,7 +692,7 @@
                         <div class="accordion-content-inner">
                             <div class="card-grid">
                                 <div class="info-box">
-                                    <h3><i class="fa-solid fa-child-reaching"></i> Lavender (Lavanda) & Bruce</h3>
+                                    <h3><i class="fa-solid fa-child-reaching"></i> Lavender (Lavanda) & Bruce (Bolaños)</h3>
                                     <p><strong>Lavender (Lavanda):</strong> Flacucha, pequeña, amiga leal y muy atrevida (pone la salamandra en el agua de Tronchatoro).</p>
                                     <p><strong>Bruce Bogtrotter (Bruce Bolaños):</strong> Niño regordete de once años, castigado a comer la tarta gigante pero desarrolla una resistencia épica venciéndole a la directora.</p>
                                 </div>
@@ -703,7 +713,7 @@
             </div>
         </main>
 
-        <!-- PESTAÑA: Trama (Cascade Collapse) -->
+        <!-- PESTAÑA: Trama -->
         <main id="trama" class="tab-content">
             <div class="accordion-item active">
                 <button class="accordion-header" onclick="toggleAccordion(this)">
@@ -753,11 +763,11 @@
         <main id="quiz" class="tab-content">
             <div class="quiz-intro">
                 <h2><i class="fa-solid fa-brain"></i> MEGA CUESTIONARIO (40 Preguntas)</h2>
-                <p style="color: var(--text-muted);">Evalúa todo tu conocimiento sobre el autor, la historia, los nombres y el universo del libro. Desliza hacia abajo para que aparezcan las preguntas mágicamente. Al seleccionar una opción, se evaluará al instante.</p>
+                <p style="color: var(--text-muted);">Evalúa todo tu conocimiento. Desliza hacia abajo para que aparezcan las preguntas mágicamente. Al seleccionar una opción, se evaluará al instante.</p>
             </div>
             
             <div id="quiz-container">
-                <!-- Inyectado vía JS con IntersectionObserver para los Fade Groups -->
+                <!-- Inyectado vía JS -->
             </div>
             
             <button class="btn-submit" onclick="mostrarResultadosFinales()">
@@ -772,7 +782,7 @@
             <i class="fa-solid fa-xmark close-icon" onclick="closeModal()"></i>
             <i id="modal-icon" class="fa-solid fa-award icon-score"></i>
             <h3 id="modal-title">Resultado</h3>
-            <p id="modal-desc">Has completado el cuestionario.</p>
+            <div id="modal-desc" style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 1.5rem;"></div>
             <button class="btn-close-modal" onclick="closeModal()">Cerrar</button>
         </div>
     </div>
@@ -785,6 +795,7 @@
             
             document.getElementById(tabName).classList.add('active');
             btnElement.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         // Lógica de Accordion
@@ -799,55 +810,61 @@
             }
         }
 
-        // Array de 40 Preguntas Completas con nombres adaptados (Miel, Tronchatoro, Bolaños)
+        // 40 Preguntas
         const preguntas = [
             // Autor y Obra (4)
             { q: "¿Cuál es la nacionalidad del autor de Matilda, Roald Dahl?", options: ["Estadounidense", "Británico, hijo de noruegos", "Australiano"], ans: 1, exp: "Roald Dahl nació en Gales, Reino Unido, pero sus padres eran inmigrantes noruegos." },
             { q: "¿En qué año se publicó originalmente el libro Matilda?", options: ["1970", "1995", "1988"], ans: 2, exp: "La obra fue publicada en el año 1988." },
-            { q: "¿Qué profesión de riesgo tuvo Roald Dahl durante su juventud?", options: ["Piloto de aviación de la RAF", "Soldado de infantería", "Buzo profesional"], ans: 0, exp: "Fue piloto de la Royal Air Force (RAF) en la Segunda Guerra Mundial y sobrevivió a un accidente." },
+            { q: "¿Qué profesión de riesgo tuvo Roald Dahl durante su juventud?", options: ["Piloto de aviación de la RAF", "Soldado de infantería", "Buzo profesional"], ans: 0, exp: "Fue piloto de la Royal Air Force (RAF) en la Segunda Guerra Mundial." },
             { q: "¿Cuál de estas NO es una obra escrita por Roald Dahl?", options: ["Las brujas", "Charlie y la fábrica de chocolate", "Alicia en el país de las maravillas"], ans: 2, exp: "Alicia fue escrita por Lewis Carroll, no por Dahl." },
+            
             // Historia Temprana (6)
-            { q: "¿A qué edad aprendió Matilda a leer sola?", options: ["A los 3 años", "A los 5 años", "A los 4 años"], ans: 0, exp: "A los tres años ya leía sola usando los periódicos y revistas que encontraba en casa." },
+            { q: "¿A qué edad aprendió Matilda a leer sola?", options: ["A los 3 años", "A los 5 años", "A los 4 años"], ans: 0, exp: "A los tres años ya leía sola usando periódicos y revistas en casa." },
             { q: "¿Cuál fue el primer libro para adultos que Matilda leyó gracias a la bibliotecaria?", options: ["Oliver Twist", "Grandes esperanzas", "El jardín secreto"], ans: 1, exp: "La señora Phelps le dio 'Grandes esperanzas' de Charles Dickens." },
-            { q: "¿Qué hace la señora Wormwood, la madre de Matilda, todas las tardes?", options: ["Jugar al bingo en Aylesbury", "Trabajar en una tienda", "Dormir la siesta"], ans: 0, exp: "Era adicta al bingo y se iba al pueblo vecino, dejando a su hija sola toda la tarde." },
-            { q: "¿A qué se dedica el Sr. Harry Wormwood?", options: ["Vendedor de seguros", "Vendedor de coches de segunda mano", "Agente inmobiliario"], ans: 1, exp: "Vendía coches usados engañando a los clientes para ganar dinero sucio." },
+            { q: "¿Qué hace la señora Wormwood, la madre de Matilda, todas las tardes?", options: ["Jugar al bingo en Aylesbury", "Trabajar en una tienda", "Dormir la siesta"], ans: 0, exp: "Era adicta al bingo y se iba al pueblo vecino, dejando a su hija sola." },
+            { q: "¿A qué se dedica el Sr. Harry Wormwood?", options: ["Vendedor de seguros", "Vendedor de coches de segunda mano", "Agente inmobiliario"], ans: 1, exp: "Vendía coches usados engañando a los clientes." },
             { q: "¿Qué herramienta específica usaba el Sr. Wormwood para alterar el kilometraje de los autos?", options: ["Un potente imán", "Una taladradora eléctrica", "Un martillo"], ans: 1, exp: "La conectaba al revés a los cables para que los números retrocedieran a toda velocidad." },
-            { q: "¿Qué material usaba el padre en la caja de cambios de los autos para que no sonaran mal temporalmente?", options: ["Grasa de animal", "Arena fina", "Serrín"], ans: 2, exp: "Mezclaba serrín con el aceite de motor para que sonara suave y la estafa funcionara." },
+            { q: "¿Qué material usaba el padre en la caja de cambios de los autos para silenciar los motores dañados?", options: ["Grasa animal", "Arena fina", "Serrín"], ans: 2, exp: "Mezclaba serrín con el aceite de motor para que sonara suave temporalmente." },
+            
             // Venganzas y Magia (5)
             { q: "¿Cuál fue la primera venganza de Matilda contra su padre?", options: ["Pegarle el sombrero a la cabeza", "Asustarlo con un fantasma", "Teñirle el pelo"], ans: 0, exp: "Puso pegamento superfuerte (Superglue) en el borde interior del sombrero." },
             { q: "¿Qué animal escondió Matilda en la chimenea para simular un fantasma?", options: ["Un gato maullador", "Un loro parlanchín", "Un ratón blanco"], ans: 1, exp: "Pidió prestado el loro llamado Chopper a su amigo Fred." },
-            { q: "¿De qué color le quedó el pelo al Sr. Wormwood tras la venganza de la loción capilar?", options: ["Verde", "Rojo fuego", "Plateado sucio / rubio platino"], ans: 2, exp: "Matilda vertió el tinte 'Rubio Platino Extrafuerte' de su madre en la botella de tónico del padre." },
-            { q: "¿Cómo descubre Matilda su poder de telequinesis por primera vez?", options: ["Doblando una cuchara", "Levantando un libro pesado", "Volcando un vaso con una salamandra"], ans: 2, exp: "Por la pura rabia e indignación de ser acusada injustamente por Trunchbull (Tronchatoro), logró volcarlo con sus ojos." },
-            { q: "¿Qué objeto utiliza Matilda en su cuarto para practicar y dominar sus nuevos poderes?", options: ["Un puro de su padre", "Una moneda", "Un trozo de tiza"], ans: 0, exp: "Usó un puro porque tenía el peso ideal y logró moverlo y levantarlo en el aire." },
+            { q: "¿De qué color le quedó el pelo al Sr. Wormwood tras la venganza de la loción capilar?", options: ["Verde", "Rojo fuego", "Plateado sucio / rubio platino"], ans: 2, exp: "Matilda vertió el tinte 'Rubio Platino Extrafuerte' de su madre en el frasco del padre." },
+            { q: "¿Cómo descubre Matilda su poder de telequinesis por primera vez?", options: ["Doblando una cuchara", "Levantando un libro pesado", "Volcando un vaso con una salamandra"], ans: 2, exp: "Por la indignación de ser acusada injustamente por Trunchbull (Tronchatoro), logró volcarlo con sus ojos." },
+            { q: "¿Qué objeto utiliza Matilda en su cuarto para practicar y dominar sus poderes?", options: ["Un puro de su padre", "Una moneda", "Un trozo de tiza"], ans: 0, exp: "Usó un puro porque tenía el peso ideal y logró levantarlo en el aire." },
+            
             // Escuela y Profesores (5)
             { q: "¿Cómo se llama la espeluznante escuela primaria a la que asiste Matilda?", options: ["Colegio Dotheboys", "Academia Trunchbull", "Escuela Primaria Crunchem"], ans: 2, exp: "El colegio era un triste edificio de ladrillo llamado Crunchem." },
-            { q: "¿Qué enseñó la señorita Honey (Miel) el primerísimo día de clase?", options: ["La tabla del cinco", "La tabla del dos y a deletrear 'gato'", "Álgebra y geometría"], ans: 1, exp: "Quería enseñarles las bases: tabla de multiplicar por dos y deletrear palabras sencillas como 'gato'." },
-            { q: "¿Qué palabra presumió Nigel saber deletrear usando una canción de la señorita Honey (Miel)?", options: ["Dificultad", "Extraordinario", "Maravilloso"], ans: 0, exp: "Nigel demostró el excelente método de Miel cantando: 'La señora D, la señora I...'" },
-            { q: "¿Qué disciplina deportiva de las Olimpiadas practicaba Agatha Trunchbull (Tronchatoro)?", options: ["Lanzamiento de jabalina", "Halterofilia", "Lanzamiento de martillo"], ans: 2, exp: "Fue lanzadora de martillo del equipo inglés, lo que explica sus inmensos músculos." },
-            { q: "¿Cuál es el concepto de 'escuela perfecta' según la señorita Trunchbull (Tronchatoro)?", options: ["Una escuela donde solo se juegue", "Una escuela llena de reglas estrictas", "Una escuela sin niños pequeños"], ans: 2, exp: "La directora confesó que inventaría un pulverizador gigante para exterminar a los niños, ya que su escuela perfecta no tendría ninguno." },
+            { q: "¿Qué enseñó la señorita Honey (Miel) el primerísimo día de clase?", options: ["La tabla del cinco", "La tabla del dos y a deletrear 'gato'", "Álgebra"], ans: 1, exp: "Quería enseñarles las bases: tabla del dos y deletrear palabras sencillas." },
+            { q: "¿Qué palabra presumió Nigel saber deletrear usando una canción de la señorita Honey (Miel)?", options: ["Dificultad", "Extraordinario", "Maravilloso"], ans: 0, exp: "Nigel cantó: 'La señora D, la señora I... para deletrear DIFICULTAD'." },
+            { q: "¿Qué disciplina deportiva de las Olimpiadas practicaba Agatha Trunchbull (Tronchatoro)?", options: ["Lanzamiento de jabalina", "Halterofilia", "Lanzamiento de martillo"], ans: 2, exp: "Fue lanzadora de martillo del equipo inglés." },
+            { q: "¿Cuál es el concepto de 'escuela perfecta' según la señorita Trunchbull (Tronchatoro)?", options: ["Una escuela donde solo se juegue", "Una escuela llena de reglas estrictas", "Una escuela sin niños pequeños"], ans: 2, exp: "La directora le confesó a Honey que inventaría un pulverizador gigante para exterminar a los niños." },
+            
             // Castigos y Niños (6)
-            { q: "¿Cómo se llama el estrecho y doloroso armario de castigo de la directora?", options: ["El Calabozo", "La Ratonera / El Agujero", "La Caja Negra"], ans: 1, exp: "'La ratonera' es un clóset angosto con las paredes incrustadas de vidrio roto y la puerta llena de clavos." },
-            { q: "¿A qué niña lanzó Trunchbull (Tronchatoro) por los aires sujetándola brutalmente por sus coletas?", options: ["Lavender (Lavanda)", "Hortensia", "Amanda Thripp"], ans: 2, exp: "Odiaba las coletas y la lanzó por encima del muro hacia el campo de deportes." },
-            { q: "¿Qué estudiante experta de 10 años instruye a Matilda y Lavender (Lavanda) sobre los horrores de la directora?", options: ["Prudence", "Hortensia", "Alice"], ans: 1, exp: "Hortensia es la valiente niña con el grano en la nariz que libraba una guerra secreta contra Tronchatoro." },
-            { q: "¿Qué trampa puso Hortensia en los calzones de gimnasia de Trunchbull (Tronchatoro)?", options: ["Jarabe espeso", "Chinches", "Polvos picapica 'Abrasapiel'"], ans: 2, exp: "Roció unos potentes polvos picapica hechos de dientes de serpiente en la ropa interior de la directora." },
-            { q: "¿Cuántas veces afirma Hortensia haber estado encerrada en La Ratonera durante su primer año?", options: ["Una vez", "Tres veces", "Seis veces"], ans: 2, exp: "Sobrevivió al encierro en 'La ratonera' en seis ocasiones diferentes debido a sus bromas." },
+            { q: "¿Cómo se llama el estrecho y doloroso armario de castigo de la directora?", options: ["El Calabozo", "La Ratonera / El Agujero", "La Caja Negra"], ans: 1, exp: "Es un clóset angosto con las paredes de vidrio roto y la puerta llena de clavos." },
+            { q: "¿A qué niña lanzó Trunchbull (Tronchatoro) por los aires sujetándola brutalmente por sus coletas?", options: ["Lavender (Lavanda)", "Hortensia", "Amanda Thripp"], ans: 2, exp: "Odiaba las coletas y la lanzó por encima del muro del patio." },
+            { q: "¿Qué estudiante experta de 10 años instruye a Matilda y Lavender (Lavanda) sobre los horrores de la directora?", options: ["Prudence", "Hortensia", "Alice"], ans: 1, exp: "Hortensia es la valiente niña con el grano en la nariz veterana de las trampas." },
+            { q: "¿Qué trampa puso Hortensia en los calzones de gimnasia de Trunchbull (Tronchatoro)?", options: ["Jarabe espeso", "Chinches", "Polvos picapica 'Abrasapiel'"], ans: 2, exp: "Roció potentes polvos picapica hechos de dientes de serpiente." },
+            { q: "¿Cuántas veces afirma Hortensia haber estado encerrada en La Ratonera (El Agujero) durante su primer año?", options: ["Una vez", "Tres veces", "Seis veces"], ans: 2, exp: "Sobrevivió al encierro en seis ocasiones diferentes." },
             { q: "¿Qué animal captura Lavender (Lavanda) para ponerlo en la jarra de agua de Trunchbull (Tronchatoro)?", options: ["Una rana", "Una salamandra acuática", "Una tarántula"], ans: 1, exp: "Atrapó una asquerosa salamandra acuática en la charca fangosa de su casa." },
+            
             // Trunchbull vs Niños (3)
-            { q: "¿Cuál es el gigantesco castigo que debe cumplir el niño Bruce Bogtrotter (Bruce Bolaños)?", options: ["Copiar todo el diccionario", "Correr 50 vueltas", "Comer una tarta de chocolate gigante"], ans: 2, exp: "Lo obligó a devorarla frente a todo el colegio por haber robado antes un pequeño trozo." },
-            { q: "¿Qué le hizo Trunchbull (Tronchatoro) a Eric Ink cuando él la contradijo al deletrear la palabra 'que'?", options: ["Lo expulsó del colegio", "Lo levantó por los aires agarrándolo de las orejas", "Lo encerró en el armario"], ans: 1, exp: "Lo levantó tirándole de las orejas causándole un dolor extremo y estirándoselas." },
-            { q: "¿Qué hizo el valiente niño Nigel cuando Trunchbull (Tronchatoro) se desmayó en clase?", options: ["Le tiró la jarra de agua fría en la cabeza", "Salió corriendo gritando", "Se puso a bailar en el escritorio"], ans: 0, exp: "Rápidamente tomó la jarra de agua y se la vació en la cara argumentando que era 'bueno para los desmayos'." },
+            { q: "¿Cuál es el gigantesco castigo que debe cumplir el niño Bruce Bogtrotter (Bruce Bolaños)?", options: ["Copiar todo el diccionario", "Correr 50 vueltas", "Comer una tarta de chocolate gigante entera"], ans: 2, exp: "Lo obligó a devorarla frente a todo el colegio por haber robado antes un pequeño trozo." },
+            { q: "¿Qué le hizo Trunchbull (Tronchatoro) a Eric Ink cuando él la contradijo al deletrear la palabra 'que'?", options: ["Lo expulsó del colegio", "Lo levantó por los aires agarrándolo de las orejas", "Lo encerró en el armario"], ans: 1, exp: "Lo levantó tirándole de las orejas causándole un dolor extremo." },
+            { q: "¿Qué hizo el valiente niño Nigel cuando la Trunchbull (Tronchatoro) se desmayó en clase?", options: ["Le tiró la jarra de agua fría en la cabeza", "Salió corriendo gritando", "Se puso a bailar en el escritorio"], ans: 0, exp: "Rápidamente tomó la jarra de agua y se la vació en la cara." },
+            
             // Misterio de Honey y Final (11)
-            { q: "¿Qué edad tiene aproximadamente la señorita Honey (Miel)?", options: ["Alrededor de 23 o 24 años", "Casi 30 años", "Apenas 19 años"], ans: 0, exp: "El texto especifica que no tendría más de 23 o 24 años." },
-            { q: "¿Qué parentesco existe realmente entre Trunchbull (Tronchatoro) y la señorita Honey (Miel)?", options: ["Son hermanastras", "Trunchbull es la tía de Honey", "Trunchbull es la madre adoptiva de Honey"], ans: 1, exp: "Agatha Trunchbull es la cuñada del padre de Jenny Miel (su tía), quien llegó a vivir con ellos tras morir la madre." },
-            { q: "¿Cómo se llamaba el difunto padre de la señorita Honey (Miel)?", options: ["Michael", "Harry", "Magnus"], ans: 2, exp: "El doctor Magnus murió supuestamente por suicidio, dejando a la pequeña Jenny a merced de su malvada cuñada." },
-            { q: "¿Cuánto paga mensualmente de alquiler la señorita Honey (Miel) por su humilde cabaña sin agua corriente?", options: ["Nada, es prestada", "10 peniques a la semana", "10 libras al mes"], ans: 1, exp: "Pagaba una miseria (10 peniques) al granjero dueño de la choza, ya que su tía se quedaba con todo su salario." },
-            { q: "¿Qué poema famoso recitaba la señorita Honey (Miel) justo antes de entrar a su pequeña casa?", options: ["Uno de William Shakespeare", "Uno de Dylan Thomas", "Uno de Charles Dickens"], ans: 1, exp: "Recitaba unos hermosos versos del poeta Dylan Thomas." },
-            { q: "¿Cómo aterroriza Matilda definitivamente a la directora para que abandone el pueblo y devuelva la casa?", options: ["Levanta a la directora por los aires", "Hace flotar la tiza y escribe un mensaje como si fuera el fantasma de Magnus", "Rompe todas las ventanas del colegio"], ans: 1, exp: "Al ver el mensaje de su cuñado supuestamente muerto escribiéndose solo, Tronchatoro se desmaya de pánico." },
-            { q: "¿Por qué motivo hacen las maletas apresuradamente los padres de Matilda al final de la historia?", options: ["Ganaron la lotería nacional", "La policía los busca por recibir y alterar coches robados", "El padre consiguió empleo en una automotora de lujo"], ans: 1, exp: "Formaban parte de una red criminal que pintaba y cambiaba matrículas a autos robados." },
-            { q: "¿A qué país decide fugarse la familia Wormwood?", options: ["Francia", "España", "Australia"], ans: 1, exp: "El padre asegura que allí el clima es mejor y cree que estará a salvo de la policía." },
-            { q: "¿Qué decisión drástica toma Matilda al enterarse de que su familia se va para siempre?", options: ["Llama a la policía", "Le ruega a sus padres quedarse a vivir con la señorita Honey (Miel)", "Huye al bosque a esconderse"], ans: 1, exp: "Fue a pedirles permiso para quedarse con su maestra. Ellos accedieron sin siquiera prestarle atención o mirarla con cariño." },
-            { q: "¿Qué sucede con los poderes mágicos/telequinéticos de Matilda en el desenlace?", options: ["Se intensifican mucho más", "Se vuelven incontrolables", "Desaparecen por completo"], ans: 2, exp: "Al saltar a un grado superior, su mente agota toda su energía y potencial en los estudios, perdiendo sus habilidades mágicas." },
-            { q: "La enseñanza principal de la obra destaca que:", options: ["Los lazos de sangre son lo más importante en la vida", "La lectura y la inteligencia pueden vencer a la tiranía y la ignorancia adulta", "No hay que usar poderes mágicos para el mal"], ans: 1, exp: "El libro demuestra que el intelecto y el valor (además de crear lazos con personas afines como la señorita Miel) vencen a los opresores y abusivos." }
+            { q: "¿Qué edad tiene la señorita Honey (Miel)?", options: ["Alrededor de 23 o 24 años", "Casi 30 años", "Apenas 19 años"], ans: 0, exp: "El texto especifica que no tendría más de 23 o 24 años." },
+            { q: "¿Qué parentesco existe realmente entre Trunchbull (Tronchatoro) y la señorita Honey (Miel)?", options: ["Son hermanastras", "Trunchbull es la tía de Honey", "Trunchbull es la madre adoptiva de Honey"], ans: 1, exp: "Agatha Trunchbull es la cuñada del padre de Jenny (su tía)." },
+            { q: "¿Cómo se llamaba el difunto padre de la señorita Honey (Miel)?", options: ["Michael", "Harry", "Magnus"], ans: 2, exp: "El doctor Magnus murió, presuntamente por suicidio o asesinato." },
+            { q: "¿Cuánto paga mensualmente de alquiler la señorita Honey (Miel) por su humilde cabaña?", options: ["Nada, es prestada", "10 peniques a la semana", "10 libras al mes"], ans: 1, exp: "Pagaba una miseria al granjero, ya que su tía se quedaba con todo su salario." },
+            { q: "¿Qué poeta recitaba la señorita Honey (Miel) justo antes de entrar a su pequeña casa?", options: ["William Shakespeare", "Dylan Thomas", "Charles Dickens"], ans: 1, exp: "Recitaba unos hermosos versos del poeta Dylan Thomas." },
+            { q: "¿Cómo aterroriza Matilda definitivamente a la directora para que abandone el pueblo?", options: ["La levanta por los aires", "Hace flotar la tiza y escribe un mensaje fingiendo ser el fantasma de Magnus", "Rompe todas las ventanas"], ans: 1, exp: "Al ver el mensaje amenazante de su cuñado muerto, Tronchatoro se desmaya de pánico." },
+            { q: "¿Por qué motivo hacen las maletas apresuradamente los padres de Matilda al final de la historia?", options: ["Ganaron la lotería nacional", "La policía los busca por alterar coches robados", "Consiguieron empleo en el extranjero"], ans: 1, exp: "Formaban parte de una red criminal que pintaba y cambiaba matrículas a autos robados." },
+            { q: "¿A qué país decide fugarse la familia Wormwood?", options: ["Francia", "España", "Australia"], ans: 1, exp: "El padre asegura que allí el clima es mejor y estarán a salvo de la policía." },
+            { q: "¿Qué decisión drástica toma Matilda al enterarse de que su familia se va para siempre?", options: ["Llama a la policía", "Le ruega a sus padres quedarse a vivir con la señorita Honey (Miel)", "Huye al bosque"], ans: 1, exp: "Fue a pedirles permiso para quedarse con su maestra. Ellos accedieron sin siquiera mirarla." },
+            { q: "¿Qué sucede con los poderes telequinéticos de Matilda en el desenlace?", options: ["Se intensifican mucho más", "Se vuelven incontrolables", "Desaparecen por completo"], ans: 2, exp: "Al saltar a un grado superior, su mente agota toda su energía en los estudios." },
+            { q: "La enseñanza principal de la obra destaca que:", options: ["Los lazos de sangre son lo único importante", "El conocimiento y la inteligencia pueden vencer a la tiranía", "No hay que usar magia nunca"], ans: 1, exp: "El libro demuestra que el intelecto y el valor vencen a los opresores y abusivos." }
         ];
 
         let puntajeCorrecto = 0;
@@ -884,31 +901,30 @@
         
         container.innerHTML = htmlContent;
 
-        // Intersection Observer para Fade In Scroll Animation
+        // Intersection Observer para Animación Fade In
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if(entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    observer.unobserve(entry.target); // Animarlo solo una vez
+                    observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.05 });
 
         document.querySelectorAll('.fade-group').forEach(group => {
             observer.observe(group);
         });
 
-        // Función para validar la respuesta inmediatamente
+        // Validar respuesta al momento
         function verificarRespuesta(qIndex, seleccionadaIndex) {
             const p = preguntas[qIndex];
             const opciones = document.getElementsByName(`q${qIndex}`);
             const feedback = document.getElementById(`feedback-${qIndex}`);
             
-            // Deshabilitar todas las opciones para esa pregunta
+            // Deshabilitar todas
             opciones.forEach((opt, idx) => {
                 opt.disabled = true;
-                const label = document.getElementById(`label-${qIndex}-${idx}`);
-                label.classList.add('disabled');
+                document.getElementById(`label-${qIndex}-${idx}`).classList.add('disabled');
             });
 
             respondidas++;
@@ -926,7 +942,7 @@
                 document.getElementById(`label-${qIndex}-${seleccionadaIndex}`).style.backgroundColor = "var(--danger-bg)";
                 document.getElementById(`label-${qIndex}-${seleccionadaIndex}`).style.borderColor = "var(--danger)";
                 
-                // Mostrar cuál era la correcta
+                // Resaltar la correcta
                 document.getElementById(`label-${qIndex}-${p.ans}`).style.backgroundColor = "var(--success-bg)";
                 document.getElementById(`label-${qIndex}-${p.ans}`).style.borderColor = "var(--success)";
                 
@@ -935,7 +951,7 @@
             }
         }
 
-        // Control del Modal para el Resultado Final
+        // Mostrar Resultado Final con cálculo de Nota Escala 1.0 a 7.0
         const modal = document.getElementById('scoreModal');
         
         function mostrarResultadosFinales() {
@@ -943,29 +959,32 @@
             const title = document.getElementById('modal-title');
             const desc = document.getElementById('modal-desc');
             const total = preguntas.length;
-            const porcentaje = (puntajeCorrecto / total) * 100;
+            
+            // Cálculo de nota de 1.0 a 7.0
+            const nota = (1 + (puntajeCorrecto / total) * 6).toFixed(1);
 
             icon.className = "fa-solid icon-score";
+            
             if (respondidas < total) {
                 icon.classList.add("fa-clipboard-question", "score-secondary");
                 title.innerText = "¡Cuestionario Incompleto!";
                 title.style.color = "var(--primary)";
-                desc.innerHTML = `Solo has respondido <strong>${respondidas}</strong> de <strong>${total}</strong> preguntas.<br>Sigue bajando y completa las que te faltan.`;
-            } else if (porcentaje >= 80) {
+                desc.innerHTML = `Solo has respondido <strong>${respondidas}</strong> de <strong>${total}</strong> preguntas.<br>Sigue bajando y completa las que te faltan para calcular tu nota final.`;
+            } else if (nota >= 6.0) {
                 icon.classList.add("fa-trophy", "score-excellent");
                 title.innerText = "¡Excelente Trabajo!";
                 title.style.color = "var(--success)";
-                desc.innerHTML = `Tu puntuación es de <strong>${puntajeCorrecto}</strong> correctas de <strong>${total}</strong>. ¡Eres tan brillante como Matilda!`;
-            } else if (porcentaje >= 50) {
+                desc.innerHTML = `Tu puntuación es de <strong>${puntajeCorrecto}</strong> correctas de <strong>${total}</strong>.<br><div class="nota-box" style="color:var(--success);">Nota: ${nota}</div>¡Eres tan brillante como Matilda!`;
+            } else if (nota >= 4.0) {
                 icon.classList.add("fa-thumbs-up", "score-good");
-                title.innerText = "¡Buen Intento!";
+                title.innerText = "¡Aprobado!";
                 title.style.color = "var(--secondary)";
-                desc.innerHTML = `Tu puntuación es de <strong>${puntajeCorrecto}</strong> correctas de <strong>${total}</strong>. Buen trabajo, pero puedes mejorar.`;
+                desc.innerHTML = `Tu puntuación es de <strong>${puntajeCorrecto}</strong> correctas de <strong>${total}</strong>.<br><div class="nota-box" style="color:var(--secondary);">Nota: ${nota}</div>Buen trabajo, pero puedes mejorar.`;
             } else {
                 icon.classList.add("fa-book", "score-poor");
-                title.innerText = "Sigue practicando";
+                title.innerText = "Insuficiente";
                 title.style.color = "var(--danger)";
-                desc.innerHTML = `Tu puntuación es de <strong>${puntajeCorrecto}</strong> correctas de <strong>${total}</strong>. Te sugerimos repasar la lectura.`;
+                desc.innerHTML = `Tu puntuación es de <strong>${puntajeCorrecto}</strong> correctas de <strong>${total}</strong>.<br><div class="nota-box" style="color:var(--danger);">Nota: ${nota}</div>Te sugerimos repasar la lectura del libro.`;
             }
             
             modal.classList.add('show');
@@ -975,7 +994,6 @@
             modal.classList.remove('show');
         }
 
-        // Cerrar modal clickeando fuera
         window.onclick = function(event) {
             if (event.target == modal) {
                 closeModal();
